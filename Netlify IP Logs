@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>IP Tracker</title>
+</head>
+<body>
+  <h2>Your Visit Details</h2>
+  <pre id="ipData">Loading IP details...</pre>
+
+  <script>
+    fetch('https://ipapi.co/json/')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('ipData').textContent = `
+IP Address: ${data.ip}
+City: ${data.city}
+Region: ${data.region}
+Country: ${data.country_name}
+Timezone: ${data.timezone}
+Org/ISP: ${data.org}
+Date & Time: ${new Date().toLocaleString()}
+        `;
+      })
+      .catch(() => {
+        document.getElementById('ipData').textContent = "Could not fetch IP details.";
+      });
+  </script>
+</body>
+</html>
